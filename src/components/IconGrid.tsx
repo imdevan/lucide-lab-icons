@@ -2,9 +2,10 @@ import { IconCard } from './IconCard';
 
 interface IconGridProps {
   icons: { name: string; iconNode: any }[];
+  onIconSelect: (name: string) => void;
 }
 
-export const IconGrid = ({ icons }: IconGridProps) => {
+export const IconGrid = ({ icons, onIconSelect }: IconGridProps) => {
   if (icons.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-center">
@@ -20,7 +21,13 @@ export const IconGrid = ({ icons }: IconGridProps) => {
   return (
     <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3">
       {icons.map((icon, index) => (
-        <IconCard key={icon.name} name={icon.name} iconNode={icon.iconNode} index={index} />
+        <IconCard 
+          key={icon.name} 
+          name={icon.name} 
+          iconNode={icon.iconNode} 
+          index={index}
+          onSelect={onIconSelect}
+        />
       ))}
     </div>
   );
