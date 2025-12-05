@@ -7,15 +7,17 @@ interface IconCardProps {
   name: string;
   iconNode: Parameters<typeof Icon>[0]['iconNode'];
   index: number;
+  onSelect: (name: string) => void;
 }
 
-export const IconCard = ({ name, iconNode, index }: IconCardProps) => {
+export const IconCard = ({ name, iconNode, index, onSelect }: IconCardProps) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
     const importCode = `import { ${name} } from '@lucide/lab';`;
     await navigator.clipboard.writeText(importCode);
     setCopied(true);
+    onSelect(name);
     toast.success('Copied to clipboard', {
       description: importCode,
     });

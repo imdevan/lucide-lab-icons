@@ -7,6 +7,7 @@ import { UsageExample } from '@/components/UsageExample';
 
 const Index = () => {
   const [search, setSearch] = useState('');
+  const [selectedIcon, setSelectedIcon] = useState('coconut');
 
   const filteredIcons = useMemo(() => {
     if (!search.trim()) return labIconsList;
@@ -22,7 +23,7 @@ const Index = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
         <Header />
         
-        <UsageExample />
+        <UsageExample selectedIcon={selectedIcon} />
         
         <div className="mb-8">
           <SearchBar
@@ -33,7 +34,7 @@ const Index = () => {
           />
         </div>
         
-        <IconGrid icons={filteredIcons} />
+        <IconGrid icons={filteredIcons} onIconSelect={setSelectedIcon} />
         
         <footer className="mt-20 pt-8 border-t border-border text-center">
           <p className="text-sm text-muted-foreground">
